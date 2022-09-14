@@ -59,3 +59,24 @@ for i in range(0,29745):
         ls[i].append(-3)
 lsdf=pd.DataFrame(ls,columns=['Time',"U'","V'","W'",'Octant'])
 dic={'1':0,'-1':0,'2':0,'-2':0,'3':0,'-3':0,'4':0,'-4':0}
+for i in range(29745):
+  dic[str(ls[i][4])]=dic[str(ls[i][4])]+1
+mod=5000
+ans=[]
+t=30000//mod
+temp=[]
+y=0
+for i in range(t):
+  x=mod*i
+  if(i==t-1):
+    y=27944
+  else:
+    y=mod*(i+1)-1
+  z=str(x)+'-'+str(y)
+  temp.append(z)
+  dic1={'1':0,'-1':0,'2':0,'-2':0,'3':0,'-3':0,'4':0,'-4':0}
+  for j in range(x,y):
+    dic1[str(ls[j][4])]=dic1[str(ls[j][4])]+1
+  temp1=[dic1['1'],dic1['-1'],dic1['2'],dic1['-2'],dic1['3'],dic1['-3'],dic1['4'],dic1['-4']]
+  dic2={z:temp1}
+  ans.append(dic2)
