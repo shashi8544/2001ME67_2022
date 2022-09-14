@@ -1,26 +1,32 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-print("hello world")
-=======
-def factorial(int x):
-    
-
-x=int(input("Enter the number whose factorial is to be found"))
-factorial(x)
->>>>>>> a093f6a756f03b64e4d771512ac162920d2e4807
-=======
-def octact_identification(mod=5000):
-###Code
-
-
-from platform import python_version
-ver = python_version()
-
-if ver == "3.8.10":
-    print("Correct Version Installed")
-else:
-    print("Please install 3.8.10. Instruction are present in the GitHub Repo/Webmail. Url: https://pastebin.com/nvibxmjw")
-
-mod=5000
-octact_identification(mod)
->>>>>>> 63a3b8790ff61b4d005ae57e6e7704324f040548
+import pandas as pd
+import csv
+try:
+  dataset=pd.read_csv(r"octant_input.csv")
+  val=dataset.values
+  val1=val.tolist()
+except:
+  print("file is not found")
+try:
+  u=dataset['U'].values
+  Uavg=0
+  count=0
+  for i in u:
+    Uavg=Uavg+i
+    count=count+1
+  Uavg=Uavg/count
+  v=dataset['V'].values
+  Vavg=0
+  count1=0
+  for i in v:
+    Vavg=Vavg+i
+    count1=count1+1
+  Vavg=Vavg/count1
+  w=dataset['W'].values
+  Wavg=0
+  count2=0
+  for i in w:
+    Wavg=Wavg+i
+    count2=count2+1
+  Wavg=Wavg/count2
+except:
+  print("there is typo in average calculation")
