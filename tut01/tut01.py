@@ -1,11 +1,19 @@
+#importing pandas which manage dataframe
 import pandas as pd
-import csv
+
+
+#try reading input file if present in curr directory
+
 try:
   dataset=pd.read_csv(r"octant_input.csv")
   val=dataset.values
   val1=val.tolist()
 except:
   print("file is not found")
+
+
+#calculating average of u v and w from given dataset
+
 try:
   u=dataset['U'].values
   Uavg=0
@@ -31,6 +39,10 @@ try:
 except:
   print("there is typo in average calculation")
 df=[Uavg,Vavg,Wavg]
+
+
+#from csv creating a list of u',v',w'
+
 ls=[]
 for i in range(0,29745):
   ls.append([val1[i][0],val1[i][1]-Uavg,val1[i][2]-Vavg,val1[i][3]-Wavg])
@@ -57,11 +69,26 @@ for i in range(0,29745):
         ls[i].append(3)
       else:
         ls[i].append(-3)
-lsdf=pd.DataFrame(ls,columns=['Time',"U'","V'","W'",'Octant'])
-dic={'1':0,'-1':0,'2':0,'-2':0,'3':0,'-3':0,'4':0,'-4':0}
-for i in range(29745):
-  dic[str(ls[i][4])]=dic[str(ls[i][4])]+1
+
+
+#creating dataframe of octant and calculating overall count of octant values 
+
+try:
+  lsdf=pd.DataFrame(ls,columns=['Time',"U'","V'","W'",'Octant'])
+  dic={'1':0,'-1':0,'2':0,'-2':0,'3':0,'-3':0,'4':0,'-4':0}
+  for i in range(29745):
+    dic[str(ls[i][4])]=dic[str(ls[i][4])]+1
+except:
+  print("ls is not computed correctly")
+
+
+#taking user input(mod value)
+
 mod=5000
+
+
+#calculating range of mod and its count value
+
 ans=[]
 t=30000//mod
 temp=[]
@@ -80,6 +107,10 @@ for i in range(t):
   temp1=[dic1['1'],dic1['-1'],dic1['2'],dic1['-2'],dic1['3'],dic1['-3'],dic1['4'],dic1['-4']]
   dic2={z:temp1}
   ans.append(dic2)
+
+#updating dataset to generate output file 
+
+
 dataset['U avg']=''
 dataset['V avg']=''
 dataset['W avg']=''
