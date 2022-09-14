@@ -80,3 +80,35 @@ for i in range(t):
   temp1=[dic1['1'],dic1['-1'],dic1['2'],dic1['-2'],dic1['3'],dic1['-3'],dic1['4'],dic1['-4']]
   dic2={z:temp1}
   ans.append(dic2)
+dataset['U avg']=''
+dataset['V avg']=''
+dataset['W avg']=''
+
+dataset['U avg'][0]=df[0]
+dataset['V avg'][0]=df[1]
+dataset['W avg'][0]=df[2]
+
+dataset=dataset.join([lsdf["U'"],lsdf["V'"],lsdf["W'"],lsdf["Octant"]])
+dataset['']=''
+dataset[''][1]='User Input'
+dataset['Octant ID']=''
+dataset['Octant ID'][0]='Overall Count'
+dataset['Octant ID'][1]='MOD '+str(mod)
+dataset['1']=''
+dataset['-1']=''
+dataset['2']=''
+dataset['-2']=''
+dataset['3']=''
+dataset['-3']=''
+dataset['4']=''
+dataset['-4']=''
+for i in range(len(temp)):
+  dataset['Octant ID'][i+2]=temp[i]
+dataset.head(10)
+clist=list(dataset.columns)[-8:]
+for i in range(len(dic)):
+  dataset[clist[i]][0]=list(dic.values())[i]
+for row in range(len(ans)):
+  for col in range(len(clist)):
+    dataset[clist[col]][row+2]=list((ans[row].values()))[0][col]
+dataset.to_csv(r'Octant_output.csv',index=False)
