@@ -110,4 +110,30 @@ except:
     print("there is error in creating skelton of table")
 
 
+
+prev1=[1,-1,2,-2,3,-3,4,-4]
+ans=[]
+
+for prev in prev1:
+    count1_max=0
+    count1=0
+    temp_count=0
+    for v in lst_octant:
+        if(v==prev):
+            temp_count=temp_count+1
+        else:
+            if(temp_count>count1_max):
+                count1=1
+                count1_max=temp_count
+            elif(count1_max==temp_count & count1_max!=0):
+                count1=count1+1
+            temp_count=0
+    lst_temp=[count1_max,count1]
+    ans.append(lst_temp)
+    count1_max=0
+    count1=0
+    temp_count=0
+print(ans)
+
+
 wb.save(r'C:\Users\DELL\OneDrive\Desktop\octant_longest_subsequene_tut3\input_octant_longest_subsequence - Copy.xlsx')
