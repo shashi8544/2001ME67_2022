@@ -148,7 +148,6 @@ try:
         count1_max=0
         count1=0
         temp_count=0
-    print(ans)
 except:
     print("there is some error in codes of subsequence")
 
