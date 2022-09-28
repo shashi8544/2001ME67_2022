@@ -91,4 +91,23 @@ except:
     print("there is error in creating octant value")
     exit()
 
+### creating skelton table
+try:
+    row_head = ["count","Longest Subsquence Length","count"]
+    row_column = ["+1","-1","+2","-2","+3","-3","+4","-4"]
+    for row in sheet.iter_rows(min_row=1, min_col=13, max_row=1, max_col=15):
+        j=0
+        for cell in row:
+            cell.value=row_head[j]
+            j=j+1
+
+    i=0
+    for row in sheet.iter_rows(min_row=2, min_col=13, max_row=9, max_col=13):
+        for cell in row:
+            cell.value=row_column[i]
+        i=i+1
+except:
+    print("there is error in creating skelton of table")
+
+
 wb.save(r'C:\Users\DELL\OneDrive\Desktop\octant_longest_subsequene_tut3\input_octant_longest_subsequence - Copy.xlsx')
