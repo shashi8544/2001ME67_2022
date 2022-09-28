@@ -1,5 +1,3 @@
-
-mod=5000
 from cmath import nan
 import openpyxl
 
@@ -135,5 +133,181 @@ for j in range(t):
         ttm=ttm1+"-"+ttm2
         lst_hh.append(ttm) 
 lst_hh.append("Verified")
+
+lst_hh_val=[]
+for j in range(t):
+    lst_hh_temp=[0,0,0,0,0,0,0,0]
+    if(j==t-1):
+        y=29745
+    else:
+        y=mod*(j+1)
+    for valu in range(mod*j,y):
+        if lst_octant[valu]==1:
+            lst_hh_temp[0]=lst_hh_temp[0]+1
+        if lst_octant[valu]==-1:
+            lst_hh_temp[1]=lst_hh_temp[1]+1
+        if lst_octant[valu]==2:
+            lst_hh_temp[2]=lst_hh_temp[2]+1
+        if lst_octant[valu]==-2:
+            lst_hh_temp[3]=lst_hh_temp[3]+1
+        if lst_octant[valu]==3:
+            lst_hh_temp[4]=lst_hh_temp[4]+1
+        if lst_octant[valu]==-3:
+            lst_hh_temp[5]=lst_hh_temp[5]+1
+        if lst_octant[valu]==4:
+            lst_hh_temp[6]=lst_hh_temp[6]+1
+        if lst_octant[valu]==-4:
+            lst_hh_temp[7]=lst_hh_temp[7]+1
+        
+        
+    lst_hh_val.append(lst_hh_temp)
+
+lst_verified=[0,0,0,0,0,0,0,0]
+for i in range(6):
+    for j in range(8):
+        lst_verified[j]=lst_verified[j]+lst_hh_val[i][j]
+
+j=0
+for row in sheet.iter_rows(min_row=4, min_col=13, max_row=10, max_col=13):
+    for cell in row:
+        cell.value=lst_hh[j]
+    j=j+1
+
+i=0
+for row in sheet.iter_rows(min_row=4, min_col=14, max_row=9, max_col=21):
+    j=0
+    for cell in row:
+        cell.value=lst_hh_val[i][j]
+        j=j+1
+    i=i+1
+
+for row in sheet.iter_rows(min_row=10, min_col=14, max_row=10, max_col=21):
+    j=0
+    for cell in row:
+        cell.value=lst_verified[j]
+        j=j+1
+
+
+lst_tran_count=[]
+
+for i in range(t):
+    if(i==t-1):
+        y=29744
+    else:
+        y=mod*(i+1)-1
+    lst_tran_count_temp=[]
+    temp_1={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+    temp_11={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+    temp_2={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+    temp_22={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+    temp_3={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+    temp_33={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+    temp_4={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+    temp_44={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+    for k in range(mod*i,y):
+        
+        if(lst_octant[k]==1):
+            temp_1[lst_octant[k+1]]=temp_1[lst_octant[k+1]]+1
+        if(lst_octant[k]==-1):
+            temp_11[lst_octant[k+1]]=temp_11[lst_octant[k+1]]+1
+        if(lst_octant[k]==2):
+            temp_2[lst_octant[k+1]]=temp_2[lst_octant[k+1]]+1
+        if(lst_octant[k]==-2):
+            temp_22[lst_octant[k+1]]=temp_22[lst_octant[k+1]]+1
+        if(lst_octant[k]==3):
+            temp_3[lst_octant[k+1]]=temp_3[lst_octant[k+1]]+1
+        if(lst_octant[k]==-3):
+            temp_33[lst_octant[k+1]]=temp_33[lst_octant[k+1]]+1
+        if(lst_octant[k]==4):
+            temp_4[lst_octant[k+1]]=temp_4[lst_octant[k+1]]+1
+        if(lst_octant[k]==-4):
+            temp_44[lst_octant[k+1]]=temp_44[lst_octant[k+1]]+1
+    lst_tran_count_temp.append(temp_1)
+    lst_tran_count_temp.append(temp_11)
+    lst_tran_count_temp.append(temp_2)
+    lst_tran_count_temp.append(temp_22)
+    lst_tran_count_temp.append(temp_3)
+    lst_tran_count_temp.append(temp_33)
+    lst_tran_count_temp.append(temp_4)
+    lst_tran_count_temp.append(temp_44)
+    lst_tran_count.append(lst_tran_count_temp)
+    lst_tran_count_temp=[]
+    temp_1={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+    temp_11={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+    temp_2={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+    temp_22={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+    temp_3={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+    temp_33={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+    temp_4={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+    temp_44={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+
+lst_tran_count1=[]
+
+for i in range(t):
+    
+    lst_tran_count_temp=[]
+    temp_1={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+    temp_11={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+    temp_2={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+    temp_22={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+    temp_3={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+    temp_33={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+    temp_4={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+    temp_44={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+    for k in range(29744):
+        
+        if(lst_octant[k]==1):
+            temp_1[lst_octant[k+1]]=temp_1[lst_octant[k+1]]+1
+        if(lst_octant[k]==-1):
+            temp_11[lst_octant[k+1]]=temp_11[lst_octant[k+1]]+1
+        if(lst_octant[k]==2):
+            temp_2[lst_octant[k+1]]=temp_2[lst_octant[k+1]]+1
+        if(lst_octant[k]==-2):
+            temp_22[lst_octant[k+1]]=temp_22[lst_octant[k+1]]+1
+        if(lst_octant[k]==3):
+            temp_3[lst_octant[k+1]]=temp_3[lst_octant[k+1]]+1
+        if(lst_octant[k]==-3):
+            temp_33[lst_octant[k+1]]=temp_33[lst_octant[k+1]]+1
+        if(lst_octant[k]==4):
+            temp_4[lst_octant[k+1]]=temp_4[lst_octant[k+1]]+1
+        if(lst_octant[k]==-4):
+            temp_44[lst_octant[k+1]]=temp_44[lst_octant[k+1]]+1
+    lst_tran_count_temp.append(temp_1)
+    lst_tran_count_temp.append(temp_11)
+    lst_tran_count_temp.append(temp_2)
+    lst_tran_count_temp.append(temp_22)
+    lst_tran_count_temp.append(temp_3)
+    lst_tran_count_temp.append(temp_33)
+    lst_tran_count_temp.append(temp_4)
+    lst_tran_count_temp.append(temp_44)
+    lst_tran_count1.append(lst_tran_count_temp)
+    lst_tran_count_temp=[]
+    temp_1={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+    temp_11={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+    temp_2={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+    temp_22={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+    temp_3={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+    temp_33={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+    temp_4={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+    temp_44={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+
+
+lst_skelton_1=[[nan,"Overall Transition Count",nan,nan,nan,nan,nan,nan,nan,nan],[nan,nan,"To",nan,nan,nan,nan,nan,nan,nan],[nan,"count","+1","-1","+2","-2","+3","-3","+4","-4"],["From","+1",nan,nan,nan,nan,nan,nan,nan,nan],[nan,"-1",nan,nan,nan,nan,nan,nan,nan,nan],[nan,"+2",nan,nan,nan,nan,nan,nan,nan,nan],[nan,"-2",nan,nan,nan,nan,nan,nan,nan,nan],[nan,"+3",nan,nan,nan,nan,nan,nan,nan,nan],[nan,"-3",nan,nan,nan,nan,nan,nan,nan,nan],[nan,"+4",nan,nan,nan,nan,nan,nan,nan,nan],[nan,"-4",nan,nan,nan,nan,nan,nan,nan,nan]]
+lst_skelton=[[nan,"Mod Transition count",nan,nan,nan,nan,nan,nan,nan,nan],[nan,nan,"To",nan,nan,nan,nan,nan,nan,nan],[nan,"count","+1","-1","+2","-2","+3","-3","+4","-4"],["From","+1",nan,nan,nan,nan,nan,nan,nan,nan],[nan,"-1",nan,nan,nan,nan,nan,nan,nan,nan],[nan,"+2",nan,nan,nan,nan,nan,nan,nan,nan],[nan,"-2",nan,nan,nan,nan,nan,nan,nan,nan],[nan,"+3",nan,nan,nan,nan,nan,nan,nan,nan],[nan,"-3",nan,nan,nan,nan,nan,nan,nan,nan],[nan,"+4",nan,nan,nan,nan,nan,nan,nan,nan],[nan,"-4",nan,nan,nan,nan,nan,nan,nan,nan]]
+i=0
+for row in sheet.iter_rows(min_row=13, min_col=12, max_row=13+10, max_col=21):
+    j=0
+    for cell in row:
+        cell.value=lst_skelton_1[i][j]
+        j=j+1
+    i=i+1
+for h in range(1,t+1):
+    i=0
+    for row in sheet.iter_rows(min_row=13*(h+1), min_col=12, max_row=13*(h+1)+10, max_col=21):
+        j=0
+        for cell in row:
+            cell.value=lst_skelton[i][j]
+            j=j+1
+        i=i+1
 wb.save(r'C:\Users\DELL\OneDrive\Desktop\temp_octant\input_octant_transition_identify_Copy.xlsx')
 exit()
