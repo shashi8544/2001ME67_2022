@@ -1,4 +1,3 @@
-Uavg=0
 
 ###### define mod value
 mod=5000
