@@ -1,3 +1,7 @@
+
+#### importing openpyxl and nan
+
+
 try:
     from cmath import nan
     import openpyxl
@@ -6,7 +10,10 @@ try:
 except:
     print("there is error in loading workbook check your file directory and import openpyxl")
     exit()
+
+
     #### calculating average value
+
 try:
     sheet = wb.active
     Uavg=0
@@ -30,6 +37,8 @@ try:
 except:
     print("there is error in calculating average value")
     exit()
+
+
 
 #####creating octant of given value
 
@@ -62,25 +71,25 @@ try:
         if(p[0]>=0):
             if(p[1]>=0):
                 if(p[2]>=0):
-                    lst_octant.append(1)
+                    lst_octant.append("1")
                 else:
-                    lst_octant.append(-1)
+                    lst_octant.append("-1")
             else:
                 if(p[2]>=0):
-                    lst_octant.append(4)
+                    lst_octant.append("4")
                 else:
-                    lst_octant.append(-4)
+                    lst_octant.append("-4")
         else:
             if(p[1]>=0):
                 if(p[2]>=0):
-                    lst_octant.append(2)
+                    lst_octant.append("2")
                 else:
-                    lst_octant.append(-2)
+                    lst_octant.append("-2")
             else:
                 if(p[2]>=0):
-                    lst_octant.append(3)
+                    lst_octant.append("3")
                 else:
-                    lst_octant.append(-3)
+                    lst_octant.append("-3")
 
     i=0
     for row in sheet.iter_rows(min_row=2, min_col=11, max_row=29746, max_col=11):
@@ -90,6 +99,9 @@ try:
 except:
     print("there is error in creating octant value")
     exit()
+
+
+
 
 ### creating skelton table
 try:
@@ -109,9 +121,12 @@ try:
 except:
     print("there is error in creating skelton of table")
 
+
+
+
 #####  subsequence codes 
 try:
-    prev1=[1,-1,2,-2,3,-3,4,-4]
+    prev1=["1","-1","2","-2","3","-3","4","-4"]
     ans=[]
 
     for prev in prev1:
@@ -137,6 +152,9 @@ try:
 except:
     print("there is some error in codes of subsequence")
 
+
+
+
 ##### updating subsequence count in excel
 try:
     i=0
@@ -148,4 +166,12 @@ try:
         i=i+1
 except:
     print("there is some error in updating excel file")
-wb.save(r'C:\Users\DELL\OneDrive\Desktop\octant_longest_subsequene_tut3\input_octant_longest_subsequence - Copy.xlsx')
+
+
+##### saving excel file
+
+
+try:
+    wb.save(r'C:\Users\DELL\OneDrive\Desktop\octant_longest_subsequene_tut3\input_octant_longest_subsequence - Copy.xlsx')
+except:
+    print("there is some error in saving excel file")
