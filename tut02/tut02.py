@@ -78,9 +78,62 @@ for row in sheet.iter_rows(min_row=2, min_col=11, max_row=29746, max_col=11):
         cell.value=lst_octant[i]
     i=i+1
 
+
 t=0
 if(29746%mod==0):
     t=29746//mod
 else:
     t=(29746//mod)+1
+
+sheet.cell(row=1,column=14).value="+1"
+sheet.cell(row=1,column=15).value="-1"
+sheet.cell(row=1,column=16).value="+2"
+sheet.cell(row=1,column=17).value="-2"
+sheet.cell(row=1,column=18).value="+3"
+sheet.cell(row=1,column=19).value="-3"
+sheet.cell(row=1,column=20).value="+4"
+sheet.cell(row=1,column=21).value="-4"
+sheet.cell(row=2,column=13).value="Overall Count"
+sheet.cell(row=3,column=12).value="User Input"
+tt=str(mod)
+sheet.cell(row=3,column=13).value="mod"+" "+tt
+lst_overall_count = [0,0,0,0,0,0,0,0]
+for valu in lst_octant:
+    if valu==1:
+        lst_overall_count[0]=lst_overall_count[0]+1
+    if valu==-1:
+        lst_overall_count[1]=lst_overall_count[1]+1
+    if valu==2:
+        lst_overall_count[2]=lst_overall_count[2]+1
+    if valu==-2:
+        lst_overall_count[3]=lst_overall_count[3]+1
+    if valu==3:
+        lst_overall_count[4]=lst_overall_count[4]+1
+    if valu==-3:
+        lst_overall_count[5]=lst_overall_count[5]+1
+    if valu==4:
+        lst_overall_count[6]=lst_overall_count[6]+1
+    if valu==-4:
+        lst_overall_count[7]=lst_overall_count[7]+1
+for row in sheet.iter_rows(min_row=2, min_col=14, max_row=2, max_col=21):
+    j=0
+    for cell in row:
+        cell.value=lst_overall_count[j]
+        j=j+1
+lst_hh=[]
+for j in range(t):
+    if(j==t-1):
+        ttm1=str(mod*j)
+        ttm=ttm1+"-"+"29745"
+        lst_hh.append(ttm)
+    else:
+        if(j==0):
+            ttm1=".0000"
+        else:
+            ttm1=str(mod*j) 
+        ttm2=str(mod*(j+1)-1)
+        ttm=ttm1+"-"+ttm2
+        lst_hh.append(ttm) 
+lst_hh.append("Verified")
 wb.save(r'C:\Users\DELL\OneDrive\Desktop\temp_octant\input_octant_transition_identify_Copy.xlsx')
+exit()
