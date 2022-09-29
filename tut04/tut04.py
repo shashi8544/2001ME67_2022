@@ -187,6 +187,68 @@ for i in range(8):
     res.append(list_temp_1)
 
 
+#########creating list of time stamp
+try:   
+    new_time_list=[]
+    x=0.0
+    y=0.0
+    for i in range(1,len(ls)):
+        new_time_list.append(ls[i][0])
+    time_list=[]
+    temp=[1,-1,2,-2,3,-3,4,-4]
+    for i in range(8):
+        time_list_1=[]
+        temp_count=0
+        for j in range(29745):
+            if(temp_count==ans[i][0]):
+                z=[x,y]
+                time_list_1.append(z)
+                x=0.0
+                y=0.0
+                temp_count=0
+            if(temp[i]==lst_octant[j]):
+                if(temp_count==0):
+                    x=new_time_list[j]
+                    y=new_time_list[j]
+                else:
+                    y=new_time_list[j]
+                temp_count=temp_count+1
+            else:
+                x=0.0
+                y=0.0
+                temp_count=0
+        time_list.append(time_list_1)
+except:
+    print("Error in calculating time stamp")
+
+
+########  updating time stamp in excel
+try:
+    ro=3
+    for i in range(8):
+        for row in sheet.iter_rows(min_row=ro, min_col=17, max_row=ro, max_col=19):
+            j=0
+            for cell in row:
+                cell.value=res[i][j]
+                j=j+1
+        ro=ro+1
+        for row in sheet.iter_rows(min_row=ro, min_col=17, max_row=ro, max_col=19):
+            j=0
+            for cell in row:
+                cell.value=list_temp[j]
+                j=j+1
+        ro=ro+1
+        for items in time_list[i]:
+            for row in sheet.iter_rows(min_row=ro, min_col=18, max_row=ro, max_col=19):
+                j=0
+                for cell in row:
+                    cell.value=items[j]
+                    j=j+1
+            ro=ro+1
+
+except:
+    print("there is error in uploading time stamp in excel")
+
 try:
     wb.save(r'C:\Users\DELL\OneDrive\Desktop\octant_longest_subsequene_tut3\input_octant_longest_subsequence_with_range.xlsx')
 except:
