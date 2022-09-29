@@ -108,6 +108,61 @@ except:
     exit()
 
 
+
+### creating skelton table
+try:
+    row_head = ["count","Longest Subsquence Length","count"]
+    row_column = ["+1","-1","+2","-2","+3","-3","+4","-4"]
+    for row in sheet.iter_rows(min_row=2, min_col=13, max_row=2, max_col=15):
+        j=0
+        for cell in row:
+            cell.value=row_head[j]
+            j=j+1
+    for row in sheet.iter_rows(min_row=2, min_col=17, max_row=2, max_col=19):
+        j=0
+        for cell in row:
+            cell.value=row_head[j]
+            j=j+1
+
+    i=0
+    for row in sheet.iter_rows(min_row=3, min_col=13, max_row=10, max_col=13):
+        for cell in row:
+            cell.value=row_column[i]
+        i=i+1
+except:
+    print("there is error in creating skelton of table")
+
+
+
+
+#####  subsequence codes 
+try:
+    prev1=[1,-1,2,-2,3,-3,4,-4]
+    ans=[]
+
+    for prev in prev1:
+        count1_max=0
+        count1=0
+        temp_count=0
+        for v in lst_octant:
+            if(v==prev):
+                temp_count=temp_count+1
+            else:
+                if(temp_count>count1_max):
+                    count1=1
+                    count1_max=temp_count
+                elif(count1_max==temp_count & count1_max!=0):
+                    count1=count1+1
+                temp_count=0
+        lst_temp=[count1_max,count1]
+        ans.append(lst_temp)
+        count1_max=0
+        count1=0
+        temp_count=0
+except:
+    print("there is some error in codes of subsequence")
+
+
 try:
     wb.save(r'C:\Users\DELL\OneDrive\Desktop\octant_longest_subsequene_tut3\input_octant_longest_subsequence_with_range.xlsx')
 except:
