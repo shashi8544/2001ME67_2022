@@ -163,6 +163,30 @@ except:
     print("there is some error in codes of subsequence")
 
 
+##### updating subsequence count in excel
+try:
+    i=0
+    for row in sheet.iter_rows(min_row=3, min_col=14, max_row=10, max_col=15):
+        j=0
+        for cell in row:
+            cell.value=ans[i][j]
+            j=j+1
+        i=i+1
+except:
+    print("there is some error in updating excel file")
+
+#### finding timestamp of maximum subsequence
+res=[]
+count_line=0
+list_temp=["Time","From","To"]
+for i in range(8):
+    list_temp_1=[]
+    list_temp_1.append(row_column[i])
+    list_temp_1.append(ans[i][0])
+    list_temp_1.append(ans[i][1])
+    res.append(list_temp_1)
+
+
 try:
     wb.save(r'C:\Users\DELL\OneDrive\Desktop\octant_longest_subsequene_tut3\input_octant_longest_subsequence_with_range.xlsx')
 except:
