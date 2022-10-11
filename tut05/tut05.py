@@ -287,7 +287,21 @@ def octant_range_names(mod=5000):
             lst_record1.append(str(lst_rec[item]))
             lst_record2.append((lst_rec[item]))
         for i in range(len(lst_record2)):
-
+            sheet.cell(row=i+5,column=30).value=lst_record2[i]
+            sheet.cell(row=i+5,column=31).value=octant_name_id_mapping[lst_record1[i]]
+        lst_hh1=["Octant ID","Octant Name","Count of Rank1 Mod Value"]
+        for i in range(3):
+            sheet.cell(row=t+8,column=i+14).value=lst_hh1[i]
+        for i in range(8):
+            sheet.cell(row=i+t+9,column=14).value=lst_rec[i]
+            sheet.cell(row=i+t+9,column=15).value=octant_name_id_mapping[lst_rec1[i]]
+        print(7)
+        dict_rec={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
+        for item in lst_record2:
+            dict_rec[item]=dict_rec[item]+1
+        
+        for i in range(8):
+            sheet.cell(row=i+t+9,column=16).value=dict_rec[lst_rec[i]]
         
     except:
         print("there is some errror in creating skelton and list of rank")
