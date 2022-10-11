@@ -264,7 +264,33 @@ def octant_range_names(mod=5000):
         t1=str(lst_rec[lst_record[0]])
         sheet.cell(row=3,column=31).value=octant_name_id_mapping[t1]
 
+        lst_rank=[]
+        lst_record=[]
+        for i in range(t):
+            lst_hh_val1=lst_hh_val[i].copy()
+            lst_hh_val1.sort(reverse=True)
+            list_temp=[]
+            for k in range(8):
+                for j in range(8):
+                    if(lst_hh_val[i][k]==lst_hh_val1[j]):
+                        if(j==0):
+                            lst_record.append(k)
+                        list_temp.append(j+1)
+                        break
+            lst_rank.append(list_temp)
+        for i in range(t):
+            for j in range(8):
+                sheet.cell(row=i+5,column=j+22).value=lst_rank[i][j]
+        lst_record1=[]
+        lst_record2=[]
+        for item in lst_record:
+            lst_record1.append(str(lst_rec[item]))
+            lst_record2.append((lst_rec[item]))
+        for i in range(len(lst_record2)):
 
+        
+    except:
+        print("there is some errror in creating skelton and list of rank")
     ##### saving workbook file
     try:
         wb.save(r'C:\Users\DELL\OneDrive\Desktop\octant ID\octant_output_ranking_excel1.xlsx')
