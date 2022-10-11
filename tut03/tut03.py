@@ -1,12 +1,11 @@
 
 #### importing openpyxl and nan
 
-
 try:
     from cmath import nan
     import openpyxl
 
-    wb = openpyxl.load_workbook(r'C:\Users\DELL\OneDrive\Desktop\octant_longest_subsequene_tut3\input_octant_longest_subsequence - Copy.xlsx')
+    wb = openpyxl.load_workbook(r'C:\Users\DELL\OneDrive\Documents\GitHub\2001ME67_2022\tut03\input_octant_longest_subsequence.xlsx')
 except:
     print("there is error in loading workbook check your file directory and import openpyxl")
     exit()
@@ -171,6 +170,6 @@ except:
 
 
 try:
-    wb.save(r'C:\Users\DELL\OneDrive\Desktop\octant_longest_subsequene_tut3\input_octant_longest_subsequence - Copy.xlsx')
+    wb.save(r'C:\Users\DELL\OneDrive\Documents\GitHub\2001ME67_2022\tut03\output_octant_longest_subsequence.xlsx')
 except:
     print("there is some error in saving excel file")

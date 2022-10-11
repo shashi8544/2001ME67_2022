@@ -5,7 +5,7 @@ try:
     from cmath import nan
     import openpyxl
 
-    wb = openpyxl.load_workbook(r'C:\Users\DELL\OneDrive\Desktop\octant_longest_subsequene_tut3\input_octant_longest_subsequence_with_range.xlsx')
+    wb = openpyxl.load_workbook(r'C:\Users\DELL\OneDrive\Documents\GitHub\2001ME67_2022\tut04\input_octant_longest_subsequence_with_range.xlsx')
     sheet = wb.active
     sheet.column_dimensions['N'].width=35
     sheet.column_dimensions['R'].width=35
@@ -254,6 +254,6 @@ except:
 
 
 try:
-    wb.save(r'C:\Users\DELL\OneDrive\Desktop\octant_longest_subsequene_tut3\input_octant_longest_subsequence_with_range.xlsx')
+    wb.save(r'C:\Users\DELL\OneDrive\Documents\GitHub\2001ME67_2022\tut04\output_octant_longest_subsequence_with_range.xlsx')
 except:
     print("there is some error in saving excel file")
