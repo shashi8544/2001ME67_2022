@@ -29,7 +29,7 @@ def octant_range_names(mod=5000):
         from cmath import nan
         import openpyxl
 
-        wb = openpyxl.load_workbook(r'C:\Users\DELL\OneDrive\Desktop\octant ID\octant_input.xlsx')
+        wb = openpyxl.load_workbook(r'C:\Users\DELL\OneDrive\Documents\GitHub\2001ME67_2022\tut05\octant_input.xlsx')
     except:
         print("there is error in loading workbook check your file directory and import openpyxl")
         exit()
@@ -295,7 +295,6 @@ def octant_range_names(mod=5000):
         for i in range(8):
             sheet.cell(row=i+t+9,column=14).value=lst_rec[i]
             sheet.cell(row=i+t+9,column=15).value=octant_name_id_mapping[lst_rec1[i]]
-        print(7)
         dict_rec={1:0,-1:0,2:0,-2:0,3:0,-3:0,4:0,-4:0}
         for item in lst_record2:
             dict_rec[item]=dict_rec[item]+1
@@ -307,7 +306,7 @@ def octant_range_names(mod=5000):
         print("there is some errror in creating skelton and list of rank")
     ##### saving workbook file
     try:
-        wb.save(r'C:\Users\DELL\OneDrive\Desktop\octant ID\octant_output_ranking_excel1.xlsx')
+        wb.save(r'C:\Users\DELL\OneDrive\Documents\GitHub\2001ME67_2022\tut05\octant_output_ranking_excel.xlsx')
     except:
         print("there is error in saving excel file")
     
