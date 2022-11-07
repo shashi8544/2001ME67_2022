@@ -86,6 +86,63 @@ def attendance_report():
               init=list1[i].split(" ")[0]
     except:
         print("error in calculating total lecture taken")
+    try:
+        lent=len(list_timest)
+        
+        list_fin=["","","","","","","",""]
+        columnss=["Date","Roll","Name","Total Attendance Count","Real","duplicate","Invalid","Absent"]
+        list_roll=[]
+        for k in range(len(Roll_list)):
+            list_fin=["","","","","","","",""]
+            list_fin[1]=Roll_list[k]
+            list_fin[2]=Name_list[k]
+            list_roll.append(list_fin)
+            list_fin=["","","","","","","",""]
+            for j in range(len(total_lec_date)):
+                list_fin[0]=total_lec_date[j]
+                date_init=total_lec_date[j]
+                total_attendance_count=0
+                invalid=0
+                for i in range(lent):
+                    if(list_attend[i]==None):
+                        continue
+                    curr_roll=list_attend[i].split(" ")[0]
+                    if(curr_roll==Roll_list[k]):
+                        curr_date=list_timest[i].split(" ")[0]         
+                        curr_time=list_timest[i].split(" ")[1]
+                        if(date_init!=curr_date):
+                            continue        
+                        t1=curr_time[0]
+                        t1=t1+curr_time[1]
+                        t2=curr_time[3]
+                        t2=t2+curr_time[4]
+                        if(t1=="14" or (t1=="15" and t2=="00")):
+                            total_attendance_count=total_attendance_count+1
+                            
+                        else:
+                            invalid=invalid+1
+                list_fin[3]=total_attendance_count
+                if(total_attendance_count>0):
+                    list_fin[4]=1
+                else:
+                    list_fin[4]=0
+                if(total_attendance_count>0):
+                    list_fin[5]=total_attendance_count-1
+                else:
+                    list_fin[5]=0
+                list_fin[6]=invalid
+                if(total_attendance_count==0):
+                    list_fin[7]=1
+                else:
+                    list_fin[7]=0
+                list_roll.append(list_fin)
+                list_fin=["","","","","","","",""]
+            # df1=pd.DataFrame(list_roll,columns=columnss)
+            # columnss=["Date","Roll","Name","Total Attendance Count","Real","duplicate","Invalid","Absent"]
+            # df1.to_excel(r'C:\Users\DELL\OneDrive\Desktop\tt\output\{0}.xlsx'.format(Roll_list[k]),index=False)
+            list_roll=[]    
+    except:
+        print("There is error in calculating attendence report")
 
 attendance_report()
 #This shall be the last lines of the code.
