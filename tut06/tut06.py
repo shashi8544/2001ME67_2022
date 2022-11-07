@@ -144,6 +144,64 @@ def attendance_report():
     except:
         print("There is error in calculating attendence report")
 
+    #### creating consolidate excel file
+    try:
+        list_ans=[]
+        columns1=[]
+        columns2=["(sorted by roll)",""]
+        columns1.append("Roll")
+        columns1.append("Name")
+        for item in total_lec_date:
+            columns1.append(item)
+            columns2.append("")
+        columns1.append("Actual Lecture Taken")
+        columns1.append("Total Real")
+        columns1.append("% Attendance")
+        columns2[2]="Atleast one Real is P"
+        columns2.append("(=Total Mon+Thru dynamic count)")
+        columns2.append("")
+        columns2.append("Real/Actual Lecture Taken (Keep two digits decimal precision e.g., 90.58, round off )")
+        list_ans.append(columns2)
+        columns2=[]
+        for i in range(len(Roll_list)):
+            columns2.append(Roll_list[i])
+            columns2.append(Name_list[i])
+            count=0
+            present=False
+            for j in range(len(total_lec_date)):
+                for k in range(lent):
+                    if(list_attend[k]==None):
+                        continue
+                    curr_roll=list_attend[k].split(" ")[0]
+                    if(curr_roll==Roll_list[i]):
+                        curr_date=list_timest[k].split(" ")[0]         
+                        curr_time=list_timest[k].split(" ")[1]
+                        if(total_lec_date[j]==curr_date):       
+                            t1=curr_time[0]
+                            t1=t1+curr_time[1]
+                            t2=curr_time[3]
+                            t2=t2+curr_time[4]
+                            if(t1=="14" or (t1=="15" and t2=="00")):
+                                present=True
+                if(present==True):
+                    columns2.append("P")
+                    count=count+1
+                else:
+                    columns2.append("A")
+                present=False
+            columns2.append(total_lec)
+            columns2.append(count)
+            Attendence=count*100/total_lec
+            columns2.append(round(Attendence,2))
+            list_ans.append(columns2)
+            columns2=[]
+        print(list_ans)
+        df2=pd.DataFrame(list_ans,columns=columns1)
+        print(df2)
+        df2.to_excel(r'C:\Users\DELL\OneDrive\Desktop\tt\output\attendance_report_consolidated.xlsx',index=False)
+    except:
+        print("There is some error in creating consolidate file")
+
 attendance_report()
 #This shall be the last lines of the code.
 end_time = datetime.now()
