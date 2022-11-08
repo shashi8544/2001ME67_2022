@@ -195,9 +195,7 @@ def attendance_report():
             columns2.append(round(Attendence,2))
             list_ans.append(columns2)
             columns2=[]
-        print(list_ans)
         df2=pd.DataFrame(list_ans,columns=columns1)
-        print(df2)
         df2.to_excel(r'C:\Users\DELL\OneDrive\Desktop\tt\output\attendance_report_consolidated.xlsx',index=False)
     except:
         print("There is some error in creating consolidate file")
