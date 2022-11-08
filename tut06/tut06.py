@@ -53,8 +53,8 @@ def check_date(dat):
         exit()
 def attendance_report():
     try:
-        input_attendance=pd.read_csv(r'C:\Users\DELL\OneDrive\Desktop\tt\input_attendance.csv')
-        total_student=pd.read_csv(r'C:\Users\DELL\OneDrive\Desktop\tt\input_registered_students.csv')
+        input_attendance=pd.read_csv(r'C:\Users\DELL\OneDrive\Documents\GitHub\2001ME67_2022\tut06\input_attendance.csv')
+        total_student=pd.read_csv(r'C:\Users\DELL\OneDrive\Documents\GitHub\2001ME67_2022\tut06\input_registered_students.csv')
     except:
         print("there is error in uploading attendance file and total student file")
         exit()
@@ -86,6 +86,8 @@ def attendance_report():
               init=list1[i].split(" ")[0]
     except:
         print("error in calculating total lecture taken")
+
+#### creating individual report
     try:
         lent=len(list_timest)
         
@@ -137,12 +139,14 @@ def attendance_report():
                     list_fin[7]=0
                 list_roll.append(list_fin)
                 list_fin=["","","","","","","",""]
-            # df1=pd.DataFrame(list_roll,columns=columnss)
-            # columnss=["Date","Roll","Name","Total Attendance Count","Real","duplicate","Invalid","Absent"]
-            # df1.to_excel(r'C:\Users\DELL\OneDrive\Desktop\tt\output\{0}.xlsx'.format(Roll_list[k]),index=False)
+            df1=pd.DataFrame(list_roll,columns=columnss)
+            columnss=["Date","Roll","Name","Total Attendance Count","Real","duplicate","Invalid","Absent"]
+            df1.to_excel(r'C:\Users\DELL\OneDrive\Documents\GitHub\2001ME67_2022\tut06\Output\{0}.xlsx'.format(Roll_list[k]),index=False)
             list_roll=[]    
     except:
         print("There is error in calculating attendence report")
+
+
 
     #### creating consolidate excel file
     try:
@@ -196,7 +200,7 @@ def attendance_report():
             list_ans.append(columns2)
             columns2=[]
         df2=pd.DataFrame(list_ans,columns=columns1)
-        df2.to_excel(r'C:\Users\DELL\OneDrive\Desktop\tt\output\attendance_report_consolidated.xlsx',index=False)
+        df2.to_excel(r'C:\Users\DELL\OneDrive\Documents\GitHub\2001ME67_2022\tut06\Output\attendance_report_consolidated.xlsx',index=False)
     except:
         print("There is some error in creating consolidate file")
 
