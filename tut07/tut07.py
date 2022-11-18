@@ -857,3 +857,49 @@ def tut2(wb,mod):
             i=i+1
     except:
         print("there is error in updating mod transition value in excel")
+
+def octant_analysis(items,mod=5000):
+    ##### imorting openpyxl and nan and loading workbook
+    try:
+        wb=openpyxl.load_workbook(r"C:\Users\DELL\OneDrive\Desktop\tt\tut07\input\{}".format(items))
+    except:
+        print("there is error in loading workbook check your file directory and import openpyxl")
+        exit()
+    sheet=wb.active
+    t=0
+    if(19888%mod==0):
+        t=19888//mod
+    else:
+        t=(19888//mod)+1
+    for i in range(t+3):
+        for j in range(19):
+            sheet.cell(row=i+2,column=j+13).border=Border(left=Side(border_style='thin',color="000000"),right=Side(border_style='thin',color="000000"),top=Side(border_style='thin',color="000000"),bottom=Side(border_style='thin',color="000000"))
+    for i in range(9):
+        for j in range(3):
+            sheet.cell(row=i+12,column=j+29).border=Border(left=Side(border_style='thin',color="000000"),right=Side(border_style='thin',color="000000"),top=Side(border_style='thin',color="000000"),bottom=Side(border_style='thin',color="000000"))
+    for i in range(9):
+        for j in range(3):
+            sheet.cell(row=i+2,column=j+45).border=Border(left=Side(border_style='thin',color="000000"),right=Side(border_style='thin',color="000000"),top=Side(border_style='thin',color="000000"),bottom=Side(border_style='thin',color="000000"))
+    for h in range(t+1):
+        for i in range(9):
+            for j in range(9):
+                sheet.cell(row=h*11+i+3,column=j+35).border=Border(left=Side(border_style='thin',color="000000"),right=Side(border_style='thin',color="000000"),top=Side(border_style='thin',color="000000"),bottom=Side(border_style='thin',color="000000"))
+
+    ##### saving workbook file
+    tut5(wb,mod)
+    tut2(wb,mod)
+    tut4(wb,mod)
+    try:
+        file_name=items.split(".")[0]
+        file_name=file_name+'.'
+        file_name=file_name+items.split(".")[1]
+        wb.save(r'C:\Users\DELL\OneDrive\Desktop\tt\tut07\output\{} cm_vel_octant_analysis_mod_{}.xlsx'.format(file_name,mod))
+    except:
+        print("there is error in saving excel file 6666")
+
+for i in range(len(all_filesname)):
+    octant_analysis(all_filesname[i],mod)
+        
+#This shall be the last lines of the code.
+end_time = datetime.now()
+print('Duration of Program Execution: {}'.format(end_time - start_time))
