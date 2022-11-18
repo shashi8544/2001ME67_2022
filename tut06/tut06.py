@@ -9,8 +9,79 @@ else:
 
 import os
 from datetime import datetime
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
+from email import encoders
+import csv
+
+
+def send_mail(fromaddr, frompasswd, toaddr, msg_subject, msg_body, file_path):
+    try:
+        msg = MIMEMultipart()
+        print("[+] Message Object Created")
+    except:
+        print("[-] Error in Creating Message Object")
+        return
+
+    msg['From'] = fromaddr
+
+    msg['To'] = toaddr
+
+    msg['Subject'] = msg_subject
+
+    body = msg_body
+
+    msg.attach(MIMEText(body, 'plain'))
+
+    filename = file_path
+    attachment = open(filename, "rb")
+
+    p = MIMEBase('application', 'octet-stream')
+
+    p.set_payload((attachment).read())
+
+    encoders.encode_base64(p)
+
+    p.add_header('Content-Disposition', "attachment; filename= %s" % filename)
+
+    try:
+        msg.attach(p)
+        print("[+] File Attached")
+    except:
+        print("[-] Error in Attaching file")
+        return
+
+    try:
+        # s = smtplib.SMTP('smtp.gmail.com', 587)
+        s = smtplib.SMTP('mail.iitp.ac.in', 587)
+        print("[+] SMTP Session Created")
+    except:
+        print("[-] Error in creating SMTP session")
+        return
+    s.ehlo()
+    s.starttls()
+    s.login(fromaddr, frompasswd)
+    try:
+        print("[+] Login Successful")
+    except:
+        print("[-] Login Failed, Try changing id and password")
+
+    text = msg.as_string()
+
+    try:
+        s.sendmail(fromaddr, toaddr, text)
+        print("[+] Mail Sent successfully")
+    except:
+        print('[-] Mail not sent')
+
+    s.quit()
 
 start_time = datetime.now()
+
+
+
     ##### importing pandas
 try:
   import pandas as pd
@@ -53,8 +124,8 @@ def check_date(dat):
         exit()
 def attendance_report():
     try:
-        input_attendance=pd.read_csv(r'C:\Users\DELL\OneDrive\Documents\GitHub\2001ME67_2022\tut06\input_attendance.csv')
-        total_student=pd.read_csv(r'C:\Users\DELL\OneDrive\Documents\GitHub\2001ME67_2022\tut06\input_registered_students.csv')
+        input_attendance=pd.read_csv(r'C:\Users\DELL\OneDrive\Desktop\tt\input_attendance.csv')
+        total_student=pd.read_csv(r'C:\Users\DELL\OneDrive\Desktop\tt\input_registered_students.csv')
     except:
         print("there is error in uploading attendance file and total student file")
         exit()
@@ -86,8 +157,6 @@ def attendance_report():
               init=list1[i].split(" ")[0]
     except:
         print("error in calculating total lecture taken")
-
-#### creating individual report
     try:
         lent=len(list_timest)
         
@@ -139,14 +208,12 @@ def attendance_report():
                     list_fin[7]=0
                 list_roll.append(list_fin)
                 list_fin=["","","","","","","",""]
-            df1=pd.DataFrame(list_roll,columns=columnss)
-            columnss=["Date","Roll","Name","Total Attendance Count","Real","duplicate","Invalid","Absent"]
-            df1.to_excel(r'C:\Users\DELL\OneDrive\Documents\GitHub\2001ME67_2022\tut06\Output\{0}.xlsx'.format(Roll_list[k]),index=False)
+            # df1=pd.DataFrame(list_roll,columns=columnss)
+            # columnss=["Date","Roll","Name","Total Attendance Count","Real","duplicate","Invalid","Absent"]
+            # df1.to_excel(r'C:\Users\DELL\OneDrive\Desktop\tt\output\{0}.xlsx'.format(Roll_list[k]),index=False)
             list_roll=[]    
     except:
         print("There is error in calculating attendence report")
-
-
 
     #### creating consolidate excel file
     try:
@@ -200,11 +267,44 @@ def attendance_report():
             list_ans.append(columns2)
             columns2=[]
         df2=pd.DataFrame(list_ans,columns=columns1)
-        df2.to_excel(r'C:\Users\DELL\OneDrive\Documents\GitHub\2001ME67_2022\tut06\Output\attendance_report_consolidated.xlsx',index=False)
+        df2.to_excel(r'C:\Users\DELL\OneDrive\Desktop\tt\output\attendance_report_consolidated.xlsx',index=False)
+        try:
+                        
+            f = open(r'C:\Users\DELL\OneDrive\Desktop\tt\tut01\octant_input.csv', 'r')
+            reader = csv.reader(f)
+
+            FROM_ADDR = "xyz@iitp.ac.in"
+            FROM_PASSWD = "changeme"
+            TO_ADDR="pqr@gmail.com"
+
+            Subject = "Mandatory QR Code for IITP Gate Entry/Exit "
+            Body ='''
+            Dear Student,
+
+            Please find your attendance report of this semester of course CS384.
+            Thanking You.
+
+            Shashi
+            '''
+            from datetime import datetime
+
+            start_time = datetime.now()
+
+            #what a ever is the limit of your sending mails, like gmail has 500.
+            data_list = [row for row in reader]
+            f.close()
+            for row in data_list:
+                file_path = r'C:\Users\DELL\OneDrive\Desktop\tt\tut01\octant_input.csv'
+
+            send_mail(FROM_ADDR, FROM_PASSWD, TO_ADDR,Subject, Body, file_path)
+        except:
+            print("Error Sending mailcheck your port server try sending again also check file directories")
+        
     except:
         print("There is some error in creating consolidate file")
 
 attendance_report()
+
 #This shall be the last lines of the code.
 end_time = datetime.now()
 print('Duration of Program Execution: {}'.format(end_time - start_time))
