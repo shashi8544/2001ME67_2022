@@ -73,13 +73,13 @@ def handle_email(client_email,rand):
         s.quit()
 
     def isEmail(x):
-        # if ('@' in x) and ('.' in x):
+        if ('@' in x) and ('.' in x):
             return True
-        # else:
-        #     return False
+        else:
+            return False
 
-    FROM_ADDR = "wizardpython8544@gmail.com"
-    FROM_PASSWD = "Python8544@"
+    FROM_ADDR = "shashi19092003ranjan@gmail.com"
+    FROM_PASSWD = "oksdlmfnpqooonch"
 
     
 
@@ -261,7 +261,7 @@ class Client:
 
                 # frontsetup.destroy()  #closes the previous frontsetup
                 reset_setup = Tk() #creates a new frontsetup for loging in
-                reset_setup.configure(bg="lightorange")
+                reset_setup.configure(bg="orange")
                 reset_setup.title("Reset Password")  #set title to the frontsetup
                 reset_setup.geometry("800x500")  #set dimensions to the frontsetup
                 #add Label to the frontsetup
@@ -333,9 +333,13 @@ class Client:
         self.send_button.config(font= ("Arial", 12))
         self.send_button.pack(padx = 20, pady = 5)
 
-        self.online_button = tkinter.Button(self.win, text ="online" , command = self.onlines)
-        self.online_button.config(font= ("Arial", 12))
-        self.online_button.pack(padx = 20, pady = 5)
+        self.send_button = tkinter.Button(self.win, text ="Stop" , command = self.stop)
+        self.send_button.config(font= ("Arial", 12))
+        self.send_button.pack(padx = 20, pady = 5)
+
+        # self.online_button = tkinter.Button(self.win, text ="online" , command = self.onlines)
+        # self.online_button.config(font= ("Arial", 12))
+        # self.online_button.pack(padx = 20, pady = 5)
         
         self.gui_done = True
         
@@ -359,7 +363,6 @@ class Client:
         online_setup.configure(bg="pink")
         online_setup.title("Online")  
         online_setup.geometry("300x200")
-        online_database()
         i=0
         for rows in row1:   
             b = Button(online_setup,text=str(rows[1]),width=13,command=online_database)
